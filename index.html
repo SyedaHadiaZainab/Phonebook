@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <title>Phone Number Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Phone Number Manager</h1>
+    <form action="/add" method="post">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="number" placeholder="Phone Number" required>
+        <button type="submit">Add Contact</button>
+    </form>
+    <ul>
+        {% for contact in contacts %}
+            <li>{{ contact.name }} - {{ contact.number }} {{ '(Blocked)' if contact.blocked else '' }}</li>
+        {% endfor %}
+    </ul>
+    <form action="/call" method="post">
+        <input type="text" name="name" placeholder="Name to Call" required>
+        <button type="submit">Call</button>
+    </form>
+    <form action="/send_message" method="post">
+        <input type="text" name="name" placeholder="Name to Send Message" required>
+        <input type="text" name="message" placeholder="Message" required>
+        <button type="submit">Send Message</button>
+    </form>
+    <form action="/delete" method="post">
+        <input type="text" name="name" placeholder="Name to Delete" required>
+        <button type="submit">Delete Contact</button>
+    </form>
+    <form action="/block" method="post">
+        <input type="text" name="name" placeholder="Name to Block" required>
+        <button type="submit">Block Contact</button>
+    </form>
+</body>
+</html>
